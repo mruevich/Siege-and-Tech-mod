@@ -21,7 +21,6 @@ import org.slf4j.Logger;
 @Mod(SiegeEvolved.MODID)
 public class SiegeEvolved
 {
-    // Define mod id in a common place for everything to reference
     public static final String MODID = "siege_evolved";
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
