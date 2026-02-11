@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.mruevich.siege_evolved.blocks.ModBlocks;
 import net.mruevich.siege_evolved.items.ModCreativeModeTabs;
 import net.mruevich.siege_evolved.items.ModItems;
 import org.slf4j.Logger;
@@ -30,6 +31,7 @@ public class SiegeEvolved
 
         ModCreativeModeTabs.register(modEventBus);
         ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
 
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
@@ -48,10 +50,10 @@ public class SiegeEvolved
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
-        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS){
-            event.accept(ModItems.Bouncy);
-            event.accept(ModItems.OnyxPlushie);
-        }
+//        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS){
+//            event.accept(ModItems.Bouncy);
+//            event.accept(ModBlocks.OnyxPlushie);
+//        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call

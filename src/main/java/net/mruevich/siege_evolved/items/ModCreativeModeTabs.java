@@ -8,6 +8,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import net.mruevich.siege_evolved.SiegeEvolved;
+import net.mruevich.siege_evolved.blocks.ModBlocks;
 
 public class ModCreativeModeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
@@ -18,7 +19,7 @@ public class ModCreativeModeTabs {
             .title(Component.translatable("creativetab.general_tab"))
             .displayItems((pParameters, pOutput) -> {
                 pOutput.accept(ModItems.Bouncy.get());
-                pOutput.accept(ModItems.OnyxPlushie.get());
+                pOutput.accept(ModBlocks.OnyxPlushie.get());
             })
             .build());
 
