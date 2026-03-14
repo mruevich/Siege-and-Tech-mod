@@ -1,0 +1,20 @@
+{
+  "sound_inf_ambient": {
+    "subtitles": "Infected stuffs",
+    "sounds": [
+      "siege_evolved:inf_ambient"
+    ]
+  },
+  "sound_inf_hurt": {
+    "subtitles": "Infected stuffs",
+    "sounds": [
+      "siege_evolved:inf_hurt"
+    ]
+  },
+  "sound_inf_death": {
+    "subtitles": "Infected dies",
+    "sounds": [
+      "siege_evolved:inf_death"
+    ]
+  }
+}
