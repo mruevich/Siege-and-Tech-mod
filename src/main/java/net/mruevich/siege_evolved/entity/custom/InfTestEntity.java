@@ -16,7 +16,11 @@ import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
+import net.mruevich.siege_evolved.entity.custom.abilities.DashAbility;
 import net.mruevich.siege_evolved.sound.ModSounds;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.w3c.dom.Attr;
 
@@ -24,6 +28,8 @@ public class InfTestEntity extends Monster {
 
     public InfTestEntity leader;
     private static final double packSearchDistance = 32D;
+    private final AbilityManager abilityManager = new AbilityManager();
+    private final Ability dash = new DashAbility(this);
 
     @Override
     protected void registerGoals() {
@@ -31,8 +37,6 @@ public class InfTestEntity extends Monster {
         this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.1D, true));
         //this.goalSelector.addGoal(2, new FollowMobGoal(this, 1.2D, 64, 64));
         this.goalSelector.addGoal(4, new RandomStrollGoal(this, 1, 4));
-
-
 
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Zombie.class, true));
@@ -42,11 +46,14 @@ public class InfTestEntity extends Monster {
 
     @Override
     public void tick() {
+        abilityManager.UpdateAbilities();
         super.tick();
     }
 
     @Override
     public void aiStep() {
+        dash.UseAbility();
+
         // Find a pack if infected doesn't have a leader
         if (leader == null){
             
@@ -71,6 +78,7 @@ public class InfTestEntity extends Monster {
 
     public InfTestEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+        abilityManager.AddAbility(dash);
     }
 
     @Override
