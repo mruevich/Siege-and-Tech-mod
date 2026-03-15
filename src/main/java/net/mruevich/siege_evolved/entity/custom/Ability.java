@@ -4,7 +4,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 
-public class Ability {
+public abstract class Ability {
     public LivingEntity entity;
     public int cooldown;
     public int timeSinceUsed = 0;
@@ -15,6 +15,8 @@ public class Ability {
         this.cooldown = cooldown;
         this.type = type;
     }
+
+    public abstract boolean canUse();
 
     public void TickAbility() {
         timeSinceUsed++;
