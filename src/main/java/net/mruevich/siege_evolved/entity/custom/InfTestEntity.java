@@ -3,9 +3,7 @@ package net.mruevich.siege_evolved.entity.custom;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -28,8 +26,12 @@ public class InfTestEntity extends Monster {
 
     public InfTestEntity leader;
     private static final double packSearchDistance = 32D;
+
+    public final AnimationState dashAnimState = new AnimationState();
+    private int dashAnimTimeout = 0;
+
     private final AbilityManager abilityManager = new AbilityManager();
-    private final Ability dash = new DashAbility(this);
+    private final Ability dash = new DashAbility(this, dashAnimState);
 
     @Override
     protected void registerGoals() {
@@ -48,6 +50,10 @@ public class InfTestEntity extends Monster {
     public void tick() {
         abilityManager.UpdateAbilities();
         super.tick();
+
+        if (this.level().isClientSide()){
+            setupAnimationStates();
+        }
     }
 
     @Override
@@ -64,6 +70,27 @@ public class InfTestEntity extends Monster {
         }
 
         super.aiStep();
+    }
+
+    private void setupAnimationStates(){
+        if (dashAnimTimeout <= 0){
+            dashAnimTimeout = this.random.nextInt(400) + 800;
+            dashAnimState.start(this.tickCount);
+        }else{
+            --this.dashAnimTimeout;
+        }
+    }
+
+    @Override
+    protected void updateWalkAnimation(float pPartialTick) {
+        float f;
+        if (this.getPose() == Pose.STANDING){
+            f = Math.min(pPartialTick * 6F, 1f);
+        }else{
+            f = 0f;
+        }
+
+        this.walkAnimation.update(f, 0.2f);
     }
 
     public static AttributeSupplier.Builder createAttributes(){
@@ -83,16 +110,19 @@ public class InfTestEntity extends Monster {
 
     @Override
     protected @Nullable SoundEvent getAmbientSound() {
-        return ModSounds.SOUND_INF_AMBIENT.get();
+        //return ModSounds.SOUND_INF_AMBIENT.get();
+        return SoundEvents.WOLF_AMBIENT;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource pDamageSource) {
-        return ModSounds.SOUND_INF_HURT.get();
+        //return ModSounds.SOUND_INF_HURT.get();
+        return SoundEvents.CAT_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return ModSounds.SOUND_INF_DEATH.get();
+        //return ModSounds.SOUND_INF_DEATH.get();
+        return SoundEvents.DROWNED_DEATH;
     }
 }

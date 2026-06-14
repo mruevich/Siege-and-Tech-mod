@@ -1,17 +1,20 @@
 package net.mruevich.siege_evolved.entity.custom;
 
+import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 
 public abstract class Ability {
     public LivingEntity entity;
+    public AnimationState anim;
     public int cooldown;
     public int timeSinceUsed = 0;
     public int type;
 
-    public Ability(LivingEntity entity,int cooldown, int type) {
+    public Ability(LivingEntity entity, AnimationState anim,int cooldown, int type) {
         this.entity = entity;
+        this.anim = anim;
         this.cooldown = cooldown;
         this.type = type;
     }
