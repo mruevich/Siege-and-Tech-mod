@@ -20,6 +20,6 @@ public class KettleBlock extends BaseEntityBlock {
 
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return ;
+        return null;
     }
 }
