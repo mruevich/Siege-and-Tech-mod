@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "siege_evolved:block/onyx_plushie"
+  }
+}
