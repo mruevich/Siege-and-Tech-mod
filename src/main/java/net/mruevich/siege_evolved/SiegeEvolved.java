@@ -2,10 +2,13 @@ package net.mruevich.siege_evolved;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.model.obj.ObjLoader;
+import net.minecraftforge.client.model.obj.ObjModel;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -16,11 +19,13 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.mruevich.siege_evolved.blocks.ModBlocks;
+import net.mruevich.siege_evolved.blocks.entity.ModBlockEntities;
 import net.mruevich.siege_evolved.entity.ModEntities;
 import net.mruevich.siege_evolved.entity.client.InfTestRenderer;
 import net.mruevich.siege_evolved.items.ModCreativeModeTabs;
 import net.mruevich.siege_evolved.items.ModItems;
 import net.mruevich.siege_evolved.sound.ModSounds;
+import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -38,6 +43,7 @@ public class SiegeEvolved
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModEntities.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
         ModSounds.register(modEventBus);
 
         // Register the commonSetup method for modloading

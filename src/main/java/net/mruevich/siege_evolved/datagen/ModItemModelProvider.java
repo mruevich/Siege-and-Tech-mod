@@ -18,6 +18,8 @@ public class ModItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         simpleItem(ModItems.Bouncy);
+        simpleItem(ModItems.MushroomTea);
+        simpleItem(ModItems.Tempe);
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
